@@ -28,14 +28,6 @@
 <div class="app">
 	<ProfileRoute {telegramId} />
 
-	<div>
-		<pre>
-			{isTelegramWebApp}
-			{webAppData}
-			{userInfo}
-		</pre>
-	</div>
-
 	<main>
 		<slot />
 	</main>
