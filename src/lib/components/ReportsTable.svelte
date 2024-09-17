@@ -7,14 +7,13 @@
     export let telegramId: number;
 
     let reportsData: any | null = null;
+    let error: string | null = null;
 
     let chart: Chart | null = null;
 
     let ctx;
     let chartCanvas: any;
     let chartData: any;
-
-    let error: string | null = null;
 
     type TableRow = {
         date: string;
@@ -89,15 +88,14 @@
 {#if error}
     {error}
 {:else if reportsData}
-
-    {#if $page.url.pathname === '/'}
-    <div class="row">
-        <div class="col">
-            <div>
-                <canvas id="myChart" bind:this={chartCanvas}></canvas>
+    {#if $page.url.pathname === "/"}
+        <div class="row">
+            <div class="col">
+                <div>
+                    <canvas id="myChart" bind:this={chartCanvas}></canvas>
+                </div>
             </div>
         </div>
-    </div>
     {/if}
 
     <div>
