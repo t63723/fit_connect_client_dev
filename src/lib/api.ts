@@ -18,9 +18,6 @@ export async function apiRequest(method: 'GET' | 'POST', endpoint: string, data?
         }
 
         let url = `${baseUrl}/${endpoint}`;
-        console.log(url);
-        console.log(baseUrl);
-        console.log(endpoint);
 
         const response = await fetch(url, options);
 

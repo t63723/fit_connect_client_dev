@@ -1,8 +1,15 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
+	import { selectedReportType } from '$lib/store.js';
+
 	import { apiRequest } from "$lib/api";
-	import Header from "../../../Header.svelte";
+	import Header from "../Header.svelte";
+
+	let reportType: number | null;
+	selectedReportType.subscribe((value) => {
+		reportType = value;
+	});
 
 	let reportDate: string = new Date().toISOString().split("T")[0];
 	let reportValue: string;
@@ -12,7 +19,7 @@
 		1: "шаги",
 		2: "кбжу",
 	};
-	const reportType: any = +$page.params.reportType;
+
 	const id = 123;
 
 	const reportTypeDisplay = reportTypeTitle[reportType];
