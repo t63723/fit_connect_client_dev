@@ -1,6 +1,6 @@
 export async function apiRequest(method: 'GET' | 'POST', endpoint: string, data?: any) {
     try {
-        const baseUrl = import.meta.env.VITE_API_BASE_URL;
+        const baseUrl = import.meta.env.VITE_API_URL;
         const token = import.meta.env.VITE_API_TOKEN;
 
         const headers = {
@@ -17,7 +17,12 @@ export async function apiRequest(method: 'GET' | 'POST', endpoint: string, data?
             options.body = JSON.stringify(data);
         }
 
-        const response = await fetch(`${baseUrl}/${endpoint}`, options);
+        let url = `${baseUrl}/${endpoint}`;
+        console.log(url);
+        console.log(baseUrl);
+        console.log(endpoint);
+
+        const response = await fetch(url, options);
 
         if (!response.ok) {
             throw new Error(`error: ${response.status} ${response.statusText}`);
