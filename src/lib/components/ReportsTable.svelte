@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { page } from "$app/stores";
     import { onMount } from "svelte";
     import { getReports } from "$lib/reports";
     import Chart from "chart.js/auto"; // Import Chart.js
@@ -88,6 +89,8 @@
 {#if error}
     {error}
 {:else if reportsData}
+
+    {#if $page.url.pathname === '/'}
     <div class="row">
         <div class="col">
             <div>
@@ -95,6 +98,7 @@
             </div>
         </div>
     </div>
+    {/if}
 
     <div>
         <table>
