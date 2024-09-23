@@ -1,28 +1,35 @@
 <script lang="ts">
-	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
-	import { selectedReportType } from '$lib/store.js';
+	import { selectedReportType } from "$lib/store.js";
 
 	import { apiRequest } from "$lib/api";
 	import Header from "../Header.svelte";
 
-	let reportType: number | null;
+	const id = 123;
+
+	let reportType: any;
 	selectedReportType.subscribe((value) => {
 		reportType = value;
 	});
 
-	let reportDate: string = new Date().toISOString().split("T")[0];
-	let reportValue: string;
-
-	const reportTypeTitle = {
+	const reportTypeTitle: any = {
 		0: "вес",
 		1: "шаги",
 		2: "кбжу",
 	};
 
-	const id = 123;
+	const reportTypeDisplay: string = reportTypeTitle[reportType];
 
-	const reportTypeDisplay = reportTypeTitle[reportType];
+	let reportDate: string = new Date().toISOString().split("T")[0];
+	let reportValue: string;
+
+	async function handleClick() {
+		const url = `reports/get_service_value/?report_type=${reportType}&telegram_uid=${id}&report_date=${reportDate}`;
+
+		const response = await apiRequest("GET", url);
+
+		reportValue = response["value"];
+	}
 
 	async function handleSubmit() {
 		const formData = {
@@ -76,6 +83,13 @@
 					step="0.01"
 					required
 				/>
+			</div>
+			<div class="col">
+				<div class="text-center">
+					<button type="button" on:click={handleClick}
+						>получить</button
+					>
+				</div>
 			</div>
 		</div>
 		<div class="row">

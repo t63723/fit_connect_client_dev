@@ -15,9 +15,9 @@
 		webAppData = window.Telegram?.WebApp;
 		userInfo = webAppData?.initDataUnsafe?.user;
 
-		console.log(isTelegramWebApp);
-		console.log(webAppData);
-		console.log(userInfo);
+		// console.log(isTelegramWebApp);
+		// console.log(webAppData);
+		// console.log(userInfo);
 
 		if (userInfo != undefined) {
 			userStore.set(userInfo);
