@@ -8,7 +8,7 @@
 
     let hasProfile: boolean | null = false;
 
-    export let telegramId = 123;
+    export let telegramId: number;
 
     onMount(async () => {
         try {

@@ -9,8 +9,6 @@
     let reportsData: any | null = null;
     let error: string | null = null;
 
-    let chart: Chart | null = null;
-
     let ctx;
     let chartCanvas: any;
     let chartData: any;

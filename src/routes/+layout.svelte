@@ -3,7 +3,7 @@
 	import { userStore } from "$lib/store.js";
 	import ProfileRoute from "$lib/components/ProfileRoute.svelte";
 
-	const telegramId = 123;
+	let telegramId: number;
 
 	let isTelegramWebApp: boolean | undefined = false;
 	let webAppData: any = null;
@@ -21,6 +21,7 @@
 
 		if (userInfo != undefined) {
 			userStore.set(userInfo);
+			telegramId = userInfo.id;
 		}
 	});
 </script>
