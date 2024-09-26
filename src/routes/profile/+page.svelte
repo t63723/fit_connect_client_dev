@@ -36,7 +36,7 @@
 		};
 
 		try {
-			const url = `clients/create_general_questionnaire/?telegram_uid=${id}`;
+			const url = `clients/create_general_questionnaire/?telegram_uid=${telegramId}`;
 
 			const response = await apiRequest("POST", url, formData);
 			console.log("response:", response);
