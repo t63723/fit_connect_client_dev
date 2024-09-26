@@ -1,11 +1,16 @@
 <script lang="ts">
-	import { apiRequest } from "$lib/api";
 	import { goto } from "$app/navigation";
+	import { userStore } from "$lib/store.js";
+	import { apiRequest } from "$lib/api";
 
 	let firstName = "";
 	let lastName = "";
 	let username = "";
-	const id = 123;
+
+	let telegramId: number;
+	userStore.subscribe((value) => {
+		telegramId = value.id;
+	});
 
 	async function handleSubmit() {
 		const formData = {

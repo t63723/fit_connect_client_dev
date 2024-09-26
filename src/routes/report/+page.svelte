@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { selectedReportType } from "$lib/store.js";
+	import { userStore } from "$lib/store.js";
 
 	import { apiRequest } from "$lib/api";
 	import Header from "../Header.svelte";
 
-	const id = 123;
+	let telegramId: number;
+	userStore.subscribe((value) => {
+		telegramId = value.id;
+	});
 
 	let reportType: any;
 	selectedReportType.subscribe((value) => {

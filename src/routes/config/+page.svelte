@@ -1,9 +1,13 @@
 <script lang="ts">
+    import { userStore } from "$lib/store.js";
+
     import Header from "../Header.svelte";
     import ServiceTable from "$lib/components/ServicesTable.svelte";
 
-    const telegramId = 123;
-
+    let telegramId: number;
+    userStore.subscribe((value) => {
+        telegramId = value.id;
+    });
 </script>
 
 <svelte:head>

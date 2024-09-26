@@ -1,18 +1,20 @@
 <script lang="ts">
-	
-	import { goto } from '$app/navigation'; 
-    import { selectedReportType } from '$lib/store.js';
+	import { goto } from "$app/navigation";
+	import { userStore } from "$lib/store.js";
+	import { selectedReportType } from "$lib/store.js";
 
 	import Header from "../Header.svelte";
 	import ReportTable from "$lib/components/ReportsTable.svelte";
 
-	const telegramId = 123;
+	let telegramId: number;
+	userStore.subscribe((value) => {
+		telegramId = value.id;
+	});
 
 	function navigateToReport(reportType: number) {
 		selectedReportType.set(reportType);
 		goto("/report");
 	}
-
 </script>
 
 <svelte:head>
