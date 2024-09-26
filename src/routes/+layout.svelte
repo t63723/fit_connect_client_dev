@@ -1,29 +1,34 @@
-<script lang="ts">
-	import { userStore } from "$lib/store.js";
-	import TelegramCheck from "$lib/components/TelegramCheck.svelte";
-	import ProfileRoute from "$lib/components/ProfileRoute.svelte";
+<script>
+	import { fade } from "svelte/transition";
 
-	let telegramId: number | undefined;
-	userStore.subscribe((value) => {
-		telegramId = value.id;
-	});
+	import Login from "$lib/pages/login.svelte";
+	import Error from "$lib/pages/error.svelte";
+	import Main from "$lib/pages/main.svelte";
+
+	// import Login from "./Login.svelte";
+	// import Error from "./Error.svelte";
+	// import Main from "./Main.svelte";
+	// import Settings from "./Settings.svelte";
+
+	let currentScreen = "login";
+
+	function goToScreen(screenName) {
+		currentScreen = screenName;
+	}
 </script>
 
-<div class="app">
-	{#if telegramId}
-		<ProfileRoute {telegramId} />
-
+{#if currentScreen === "login"}
+	<Login
+		on:login={() => goToScreen("main")}
+		on:error={() => goToScreen("error")}
+	/>
+{:else if currentScreen === "error"}
+	<Error on:back={() => goToScreen("login")} />
+{:else if currentScreen === "main"}
+	<div class="app">
 		<main>
 			<slot />
 		</main>
-	{:else}
-		<TelegramCheck />
-	{/if}
-</div>
-
-<style>
-	main {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-</style>
+	</div>
+	<Main on:back={() => goToScreen("main")} />
+{/if}
