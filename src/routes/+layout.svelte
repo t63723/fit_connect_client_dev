@@ -1,37 +1,24 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import { userStore } from "$lib/store.js";
+	import TelegramCheck from "$lib/components/TelegramCheck.svelte";
 	import ProfileRoute from "$lib/components/ProfileRoute.svelte";
 
-	let telegramId: number;
-
-	let isTelegramWebApp: boolean | undefined = false;
-	let webAppData: any = null;
-	let userInfo: any | undefined;
-	let err: string | undefined | null;
-
-	onMount(async () => {
-		isTelegramWebApp = window.Telegram && window.Telegram.WebApp;
-		webAppData = window.Telegram?.WebApp;
-		userInfo = webAppData?.initDataUnsafe?.user;
-
-		// console.log(isTelegramWebApp);
-		// console.log(webAppData);
-		// console.log(userInfo);
-
-		if (userInfo != undefined) {
-			userStore.set(userInfo);
-			telegramId = userInfo.id;
-		}
+	let telegramId: number | undefined;
+	userStore.subscribe((value) => {
+		telegramId = value.id;
 	});
 </script>
 
 <div class="app">
-	<ProfileRoute {telegramId} />
+	{#if telegramId}
+		<ProfileRoute {telegramId} />
 
-	<main>
-		<slot />
-	</main>
+		<main>
+			<slot />
+		</main>
+	{:else}
+		<TelegramCheck />
+	{/if}
 </div>
 
 <style>
