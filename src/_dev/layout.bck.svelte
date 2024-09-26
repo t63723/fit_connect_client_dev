@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { userStore } from "$lib/store.js";
-	import TelegramCheck from "$lib/components/TelegramCheck.svelte";
-	import ProfileRoute from "$lib/components/ProfileRoute.svelte";
+	import TelegramCheck from "./components/TelegramCheck.svelte";
+	import ProfileRoute from "./components/ProfileRoute.svelte";
 
 	let telegramId: number | undefined;
 	userStore.subscribe((value) => {

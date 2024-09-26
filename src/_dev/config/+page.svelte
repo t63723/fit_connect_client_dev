@@ -2,7 +2,7 @@
     import { userStore } from "$lib/store.js";
 
     import Header from "../Header.svelte";
-    import ServiceTable from "$lib/components/ServicesTable.svelte";
+    import ServiceTable from "../components/ServicesTable.svelte";
 
     let telegramId: number;
     userStore.subscribe((value) => {

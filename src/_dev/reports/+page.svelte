@@ -4,7 +4,7 @@
 	import { selectedReportType } from "$lib/store.js";
 
 	import Header from "../Header.svelte";
-	import ReportTable from "$lib/components/ReportsTable.svelte";
+	import ReportTable from "../components/ReportsTable.svelte";
 
 	let telegramId: number;
 	userStore.subscribe((value) => {
