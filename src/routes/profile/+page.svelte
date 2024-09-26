@@ -49,6 +49,13 @@
 </script>
 
 <section>
+	
+	<div>
+		<pre>
+			{telegramId}
+		</pre>
+	</div>
+
 	<div class="text-center">
 		<p>Анкета</p>
 	</div>
