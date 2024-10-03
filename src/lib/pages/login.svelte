@@ -1,36 +1,54 @@
-<script>
+<script lang="ts">
     import { createEventDispatcher } from "svelte";
 
     import { onMount } from "svelte";
-    import { userStore } from "$lib/store.js";
+    import { userInfo, telegramId } from "$lib/store.js";
 
-    let isTelegramWebApp = false;
+    const debugMode = import.meta.env.VITE_DEBUG === "true";
+
     let webAppData = null;
 
-    let userInfo;
-    let telegramId;
-
     onMount(async () => {
-        isTelegramWebApp = window.Telegram && window.Telegram.WebApp;
-        webAppData = window.Telegram.WebApp;
-        userInfo = webAppData.initDataUnsafe?.user;
 
-        if (userInfo != undefined) {
-            userStore.set(userInfo);
-            telegramId = userInfo.id;
+        // @ts-ignore
+        webAppData = window.Telegram.WebApp;
+        let userData = webAppData.initDataUnsafe?.user;
+
+        if (userData != undefined) {
+            userInfo.set(userData);
+            telegramId.set(userData.id);
+        }
+
+        if (debugMode) {
+            userInfo.set({});
+            telegramId.set(123);
+            console.log("debug true, telegram id = 123");
         }
     });
 
     const dispatch = createEventDispatcher();
 
     function handleLogin() {
-        if (telegramId != undefined) {
+        console.log(telegramId);
+        if (debugMode || telegramId != undefined) {
             dispatch("login");
         } else {
             dispatch("error");
         }
-        // Если вход неудачен:
     }
 </script>
 
-<button on:click={handleLogin}>войти</button>
+<div class="button-container">
+    <div class="has-text-centered pt-5">
+        <button on:click={handleLogin} class="button">войти</button>
+    </div>
+</div>
+
+<style>
+    .button-container {
+        display: flex;
+        justify-content: center; /* Центрируем горизонтально */
+        align-items: center; /* Центрируем вертикально */
+        height: 100vh; /* Устанавливаем высоту контейнера на 100% высоты viewport */
+    }
+</style>

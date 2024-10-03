@@ -1,27 +1,36 @@
-<script>
+<script lang="ts">
     import { createEventDispatcher } from "svelte";
 
-    import { userStore } from "$lib/store.js";
+    import { userInfo, telegramId } from "$lib/store.js";
 
-    let userInfo;
-    let telegramId;
+    let storeUserInfo: {};
+    let storeTelegramId: number;
 
-    userStore.subscribe((value) => {
-        userInfo = value;
-        telegramId = value.id;
+    userInfo.subscribe((value) => {
+        storeUserInfo = value;
+    });
+    telegramId.subscribe((value) => {
+        storeTelegramId = value;
     });
 
     const dispatch = createEventDispatcher();
 </script>
 
-<div>
-    <p>Ошибка входа. Попробуйте еще раз.</p>
-    <pre>
-        {telegramId}
-    </pre>
-    <pre>
-        {JSON.stringify(userInfo)}
-    </pre>
+<div class="p-3">
+    <section class="hero is-small">
+        <div class="hero-body has-text-centered">
+            <p class="title">ошибка входа</p>
+        </div>
+    </section>
+    <div class="container-fluid">
+        <div class="pt-2">
+            <pre>{storeTelegramId}</pre>
+        </div>
+        <div class="py-2">
+            <pre>{JSON.stringify(storeUserInfo)}</pre>
+        </div>
+    </div>
+    <div class="has-text-centered">
+        <button on:click={() => dispatch("back")} class="button">назад</button>
+    </div>
 </div>
-
-<button on:click={() => dispatch("back")}>назад</button>

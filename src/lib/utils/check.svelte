@@ -1,18 +1,23 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
-    import { getProfileStatus } from "$lib/profile";
+    import { telegramId } from "$lib/store";
+
+    import { getProfileStatus } from "$lib/utils/profile";
 
     let profileData: any | null = null;
     let error: string | null = null;
 
     let hasProfile: boolean | null = false;
 
-    export let telegramId: number;
+    let storeTelegramId: number;
+    telegramId.subscribe((value) => {
+        storeTelegramId = value;
+    });
 
     onMount(async () => {
         try {
-            profileData = await getProfileStatus(telegramId);
+            profileData = await getProfileStatus(storeTelegramId);
             hasProfile = profileData.detail === "profile not found";
 
             if (hasProfile) {

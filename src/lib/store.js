@@ -1,4 +1,6 @@
 import { writable } from 'svelte/store';
 
 export const selectedReportType = writable(0);
-export const userStore = writable({});
+
+export const userInfo = writable({});
+export const telegramId = writable(0);
