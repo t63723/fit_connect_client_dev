@@ -48,8 +48,7 @@
 			const url = `clients/create_general_questionnaire/?telegram_uid=${storeTelegramId}`;
 
 			apiRequest("POST", url, formData);
-			dispatch("back");
-
+			dispatch("success");
 		} catch (error) {
 			console.error("error:", error);
 		}
@@ -64,6 +63,7 @@
 	</section>
 
 	<div class="container">
+
 		<form on:submit|preventDefault={handleSubmit}>
 			<div class="field">
 				<label class="label" for="firstName">Имя</label>
@@ -110,12 +110,13 @@
 			<div class="row">
 				<div class="col">
 					<div class="has-text-centered">
-						<button type="submit" class="button is-primary"
-							>Отправить</button
-						>
+						<button type="submit" class="button is-primary">
+							сохранить
+						</button>
 					</div>
 				</div>
 			</div>
+
 		</form>
 	</div>
 </div>
