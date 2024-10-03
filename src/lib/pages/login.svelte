@@ -9,7 +9,6 @@
     let webAppData = null;
 
     onMount(async () => {
-
         // @ts-ignore
         webAppData = window.Telegram.WebApp;
         let userData = webAppData.initDataUnsafe?.user;
@@ -20,7 +19,12 @@
         }
 
         if (debugMode) {
-            userInfo.set({});
+            userInfo.set({
+                id: 123,
+                first_name: "Иван",
+                last_name: "Петров",
+                username: "ivan_petrov",
+            });
             telegramId.set(123);
             console.log("debug true, telegram id = 123");
         }
@@ -39,7 +43,7 @@
 </script>
 
 <div class="button-container">
-    <div class="has-text-centered pt-5">
+    <div class="has-text-centered">
         <button on:click={handleLogin} class="button">войти</button>
     </div>
 </div>
