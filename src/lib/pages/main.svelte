@@ -3,6 +3,8 @@
     import { createEventDispatcher } from "svelte";
     import { telegramId } from "$lib/store.js";
 
+    import ReportsTable  from "$lib/components/ReportsTable.svelte";
+
     import { getProfileStatus } from "$lib/utils/profile";
 
     let storeTelegramId: number;
@@ -38,5 +40,7 @@
             {storeTelegramId} профиль
         </button>
     </div>
-    <div class="container"></div>
+    <div class="container">
+        <ReportsTable telegramId={storeTelegramId} />
+    </div>
 </div>
