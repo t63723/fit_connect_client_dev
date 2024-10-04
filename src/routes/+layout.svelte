@@ -4,6 +4,7 @@
 	import Success from "$lib/pages/success.svelte";
 	import Main from "$lib/pages/main.svelte";
 	import Profile from "$lib/pages/profile.svelte";
+	import Report from "$lib/pages/report.svelte";
 	import Settings from "$lib/pages/settings.svelte";
 
 	let currentScreen = "login";
@@ -32,12 +33,18 @@
 				<Main
 					on:settings={() => goToScreen("settings")}
 					on:profile={() => goToScreen("profile")}
+					on:report={() => goToScreen("report")}
 				/>
 			</div>
 		{:else if currentScreen === "settings"}
 			<Settings on:back={() => goToScreen("main")} />
 		{:else if currentScreen === "profile"}
 			<Profile on:success={() => goToScreen("success")} />
+		{:else if currentScreen === "report"}
+			<Report
+				on:back={() => goToScreen("main")}
+				on:success={() => goToScreen("success")}
+			/>
 		{/if}
 		<slot />
 	</main>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { getService } from "$lib/services";
+    import { getService } from "$lib/utils/services";
 
     export let telegramId: number;
 

@@ -87,34 +87,31 @@
     {error}
 {:else if reportsData}
     {#if $page.url.pathname === "/"}
-        <section class="py-3">
-            <div>
-                <canvas id="myChart" bind:this={chartCanvas}></canvas>
-            </div>
-        </section>
+        <div class="py-2">
+            <canvas id="myChart" bind:this={chartCanvas}></canvas>
+        </div>
     {/if}
-    <section>
-        <table class="table is-fullwidth">
-            <thead>
+
+    <table class="table is-fullwidth">
+        <thead>
+            <tr>
+                <th>дата</th>
+                <th>шаги</th>
+                <th>вес</th>
+                <th>ккал</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each tableData as row}
                 <tr>
-                    <th>дата</th>
-                    <th>шаги</th>
-                    <th>вес</th>
-                    <th>ккал</th>
+                    <td>{row.date}</td>
+                    <td>{row.type_1}</td>
+                    <td>{row.type_0}</td>
+                    <td>{row.type_2}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {#each tableData as row}
-                    <tr>
-                        <td>{row.date}</td>
-                        <td>{row.type_1}</td>
-                        <td>{row.type_0}</td>
-                        <td>{row.type_2}</td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </section>
+            {/each}
+        </tbody>
+    </table>
 {:else}
     <p>loading...</p>
 {/if}

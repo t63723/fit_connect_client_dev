@@ -3,7 +3,7 @@
     import { createEventDispatcher } from "svelte";
     import { telegramId } from "$lib/store.js";
 
-    import ReportsTable  from "$lib/components/ReportsTable.svelte";
+    import ReportsTable from "$lib/components/ReportsTable.svelte";
 
     import { getProfileStatus } from "$lib/utils/profile";
 
@@ -35,12 +35,23 @@
 </script>
 
 <div class="p-3">
-    <div class="has-text-centered">
+    <section class="has-text-centered">
         <button on:click={() => dispatch("settings")} class="button">
             {storeTelegramId} профиль
         </button>
-    </div>
-    <div class="container">
+    </section>
+    <section>
         <ReportsTable telegramId={storeTelegramId} />
-    </div>
+    </section>
+    <section>
+        <div class="has-text-centered">
+            <button
+                type="button"
+                class="button"
+                on:click={() => {
+                    dispatch("report");
+                }}>добавить</button
+            >
+        </div>
+    </section>
 </div>
